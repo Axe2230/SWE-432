@@ -30,6 +30,9 @@
   <label id = "label" for="replacement">Random string with replacement </label>
   <input type="checkbox" id="replacement" name="Random string with replacement" value=""><br><br>
 
+  <label id = "label" for="withoutReplacement">Random string without replacement </label>
+  <input type="checkbox" id="withoutReplacement" name="Random string without replacement" value=""><br><br>
+
   <label id = "label" for="sorted">Sorted Order String</label>
   <input type="checkbox" id="sorted" name="Sorted Order String" value=""><br><br>
 
@@ -44,7 +47,7 @@
 
   <input type="submit" value="Submit" onclick="getInput()">
 
-  <p>Collboration summary: Minhyuk worked on implementing basic algorithms of this website.</p>
+  <p>Collboration summary: Minhyuk worked on implementing basic algorithms of this website. Harshil added without replacement algorithm.</p>
 
 </form>
 
@@ -57,6 +60,8 @@
 	var stringInput = "";
 	var listString = [];
 	var random = "";
+  var listString2 = [];
+
 
 	function getInput() {
 
@@ -71,7 +76,7 @@
 
 		window.listString = window.stringInput.split(" ");
 		window.listString = window.listString.filter(function(listString) { return listString.trim() != ''; });
-
+    window.listString2 = Array.from(window.listString);
 		// Choose a random string
 		window.random = window.listString[Math.floor(Math.random() * window.listString.length)];
                 document.getElementById("random").value = window.random;
@@ -81,7 +86,20 @@
 		while (replacement == window.random && window.listString.length != 1) {
 			replacement = window.listString[Math.floor(Math.random() * window.listString.length)];
 		}
+
+    const index = window.listString.indexOf(replacement);
+    if(index > -1){
+      window.listString2.splice(index, 1);
+    }
+    var replacement2 =  window.listString2[Math.floor(Math.random() * window.listString2.length)];
+		while (replacement2 == window.random && window.listString2.length != 1) {
+			replacement2 = window.listString2[Math.floor(Math.random() * window.listString2.length)];
+		}
+
 		document.getElementById("replacement").value = replacement;
+
+    //without replacement
+    document.getElementById("withoutReplacement").value = replacement2;
 
 		// Strings in sorted order
 		document.getElementById("sorted").value = window.listString.sort();
