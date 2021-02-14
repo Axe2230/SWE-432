@@ -1,0 +1,100 @@
+<html>
+<head>
+  <title>SWE 432 Assignment 3</title>
+<style>
+
+</style>
+</head>
+
+<body>
+
+<div class="content">
+
+<center>
+
+<h2>The World's Most Advanced SWE 432 Text Processor by Minhyuk Ko and Harshil Patel</h2>
+
+<h3>I know you came to this website because you were too lazy to sort words by yourself. Now give me your list of strings in the box below!</h3>
+
+<form method="post" action="https://cs.gmu.edu:8443/offutt/servlet/formHandler">
+
+
+  <label id="inputLabel" for="stringInput">Your Input:</label>
+  <input type="text" id="stringInput" name="Your Input" size="60"><br><br>
+
+  <h2>I want to get:</h2>
+
+  <label id = "label" for="random">Random String</label>
+  <input type="checkbox" id="random" name="Random String" value=""><br><br>
+
+  <label id = "label" for="replacement">Random string with replacement </label>
+  <input type="checkbox" id="replacement" name="Random string with replacement" value=""><br><br>
+
+  <label id = "label" for="sorted">Sorted Order String</label>
+  <input type="checkbox" id="sorted" name="Sorted Order String" value=""><br><br>
+
+  <label id = "label" for="reverse">Reverse Order String</label>
+  <input type="checkbox" id="reverse" name="Reverse Order String" value=""><br><br>
+
+
+
+
+<p>   </p> <!--an empty line-->
+
+
+  <input type="submit" value="Submit" onclick="getInput()">
+
+  <p>Collboration summary: Minhyuk worked on implementing basic algorithms of this website.</p>
+
+</form>
+
+</center>
+
+</div>
+
+<script>
+
+	var stringInput = "";
+	var listString = [];
+	var random = "";
+
+	function getInput() {
+
+		window.stringInput = document.getElementById("stringInput").value;
+		var checkString = window.stringInput.split(" ").join("")
+
+    //Checks whether the input is empty or not
+		if (checkString == "") {
+			alert("Please type something before you click the Submit button.");
+			return;
+		}
+
+		window.listString = window.stringInput.split(" ");
+		window.listString = window.listString.filter(function(listString) { return listString.trim() != ''; });
+
+		// Choose a random string
+		window.random = window.listString[Math.floor(Math.random() * window.listString.length)];
+                document.getElementById("random").value = window.random;
+
+   // Choose a random string without replacement
+		var replacement = window.listString[Math.floor(Math.random() * window.listString.length)];
+		while (replacement == window.random && window.listString.length != 1) {
+			replacement = window.listString[Math.floor(Math.random() * window.listString.length)];
+		}
+		document.getElementById("replacement").value = replacement;
+
+		// Strings in sorted order
+		document.getElementById("sorted").value = window.listString.sort();
+
+		// Strings in reverse-sorted order
+		document.getElementById("reverse").value = window.listString.reverse();
+
+	}
+
+
+
+</script>
+
+</body>
+
+</html>
